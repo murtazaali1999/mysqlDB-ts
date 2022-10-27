@@ -5,10 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const express_handlebars_1 = require("express-handlebars"); //destructure this
 const dbConnection = require("../database/config");
 const userRoutes = require("../routes/userRoutes");
 const app = (0, express_1.default)();
 app.use([body_parser_1.default.json()]);
+//handlebars
+app.engine("handlebars", (0, express_handlebars_1.engine)({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 //routes register
 app.use([userRoutes]);
 const PORT = process.env.PORT || 5000;

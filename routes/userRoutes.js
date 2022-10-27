@@ -22,4 +22,14 @@ router.post("/create-user", async (req, res) => {
     console.log(user);
 })
 
+router.post("/find-user", async (req, res) => {
+    const { id } = req.body;
+
+    const user = await User.findByPk(id).catch((err) => {
+        console.log(err);
+    })
+
+    res.status(200).json({ user })
+})
+
 module.exports = router;

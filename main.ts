@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
-import handlebars from "express-handlebars";
 import { Sequelize } from "sequelize";
+import { engine } from "express-handlebars"; //destructure this
 
 const dbConnection = require("../database/config");
 const userRoutes = require("../routes/userRoutes");
@@ -10,6 +10,10 @@ const userRoutes = require("../routes/userRoutes");
 const app = express();
 
 app.use([bodyParser.json()]);
+
+//handlebars
+app.engine("handlebars", engine({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 //routes register
 app.use([userRoutes]);
